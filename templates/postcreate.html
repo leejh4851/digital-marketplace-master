@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+	<h1>새글쓰기</h1>
+	<br><br>
+	<form method="post" action="">
+		{% csrf_token %}
+		{{ form.as_p }}
+	<input type="submit" value="등록하기" class="btn btn-info">
+    </form>
+
+    <table class="table">
+    	<thead>
+    		<tr>
+    			<th scope="col" width="15%">#</th> 
+    			<th scope="col">제목</th> 
+    			<th scope="col" width="25%">글쓴이</th> 
+    	    </tr>
+    	</thead>
+        <tbody>
+        	{% for post in posts.all %}
+        	<tr>
+        		<td>###</td>
+        		<td>
+        			<a href="{% url 'detail' post.pk %}">
+        			    {{ post.title|truncatechars:20 }}
+        			</a>
+        		</td>
+        		<td>{{ post.author }}</td>
+        	</tr>
+        	{% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+
+
+{% endblock content %}
+
